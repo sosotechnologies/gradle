@@ -1,0 +1,23 @@
+# Specify the GitLab CI/CD pipeline configuration
+stages:
+  - build
+  - test
+
+# Define the variables used in the pipeline
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version"
+
+# Define the CI/CD pipeline jobs
+build:
+  stage: build
+  image: maven:3.8.4-openjdk-11
+  script:
+   # - rm -rf $HOME/.m2/repository  # Uncomment this line to Remove the Maven cache if job failed earlier
+    - mvn $MAVEN_CLI_OPTS -X compile
+
+test:
+  stage: test
+  image: maven:3.8.4-openjdk-11
+  script:
+    - mvn $MAVEN_CLI_OPTS test

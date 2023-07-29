@@ -1,0 +1,18 @@
+stages:
+  - build
+  - test
+
+variables:
+  CUSTOM_RUNNER_IMAGE: "registry.gitlab.com/aphhc/angelpalms-project:1.0.0"  # Replace with the image name if pushed to a registry
+
+build:
+  stage: build
+  image: $CUSTOM_RUNNER_IMAGE
+  script:
+    - echo "Building the project..."
+
+test:
+  stage: test
+  image: $CUSTOM_RUNNER_IMAGE
+  script:
+    - echo "Running tests..."
